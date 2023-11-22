@@ -1,0 +1,753 @@
+/*------------------------------------*\
+#FONTS
+\*------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/*------------------------------------*\
+#Variables
+\*------------------------------------*/
+
+:root {
+  /* colors */
+  --global-color-alpha-light: #a3a0fb;
+  --global-color-alpha: #a3a0fb;
+
+  --global-color-neutral-000: #f9f9f9; /* Ongeveer wit */
+  --global-color-neutral-050: #e3e3e8;
+  --global-color-neutral-100: #cfd2d9;
+  --global-color-neutral-200: #b4b5be;
+  --global-color-neutral-300: #9d9caf;
+  --global-color-neutral-400: #787a8f;
+  --global-color-neutral-500: #45485b;
+  --global-color-neutral-600: #393952;
+  --global-color-neutral-700: #000000; /* Zwart */
+
+  --global-color-primary-000: #f2f7fc; /* Lichtblauw */
+  --global-color-primary-100: #dbe4f7;
+  --global-color-primary-200: #c2d2f2;
+  --global-color-primary-300: #a4b6eb;
+  --global-color-primary-400: #8192e3;
+  --global-color-primary-500: #5e6cce; /* Middelblauw */
+  --global-color-primary-600: #4652af;
+  --global-color-primary-700: #001490; /* Donkerblauw */
+
+  --global-text-color: var(--global-color-primary-700);
+  --global-background-color: var(--global-color-neutral-050);
+  --global-primary-color: var(--global-color-primary-700);
+  --global-cardbackground-color: var(--global-color-neutral-000);
+
+  /* Shadows */
+  --global-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.025), 0 2px 6px rgba(0, 0, 0, 0.5);
+  --global-box-shadow-lg: 0 0 0 1px rgba(0, 0, 0, 0.025), 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  --global-input-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
+  --global-input-focus-shadow: 0 0 5px var(--global-color-alpha-light);
+
+  /* typografie */
+  --global-root-font-size: 16;
+  /* border radius */
+  --global-border-radius: calc(4 / var(--global-root-font-size));
+
+  /* whitespace */
+  --global-baseline: calc(1rem / 3);
+  /* or */
+  --global-baseline: calc(5 / var(--global-root-font-size) * 1rem);
+  /* 5px */
+  --global-whitespace-xxs: var(--global-baseline);
+  /* 10px */
+  --global-whitespace-xs: calc(var(--global-baseline) * 2);
+  /* 15px */
+  --global-whitespace-sm: calc(var(--global-baseline) * 3);
+  /* 20px */
+  --global-whitespace-md: calc(var(--global-baseline) * 4);
+  /* 25px */
+  --global-whitespace-lg: calc(var(--global-baseline) * 5);
+  /* 30px */
+  --global-whitespace-xl: calc(var(--global-baseline) * 6);
+
+  /* transitions */
+}
+
+/*------------------------------------*\
+#GENERIC
+\*------------------------------------*/
+
+/*
+    Generic: Page
+    ---
+    Global page styles + universal box-sizing:
+*/
+
+html {
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--global-background-color);
+  color: var(--global-text-color);
+  font-size: 93.75%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/*
+* Remove text-shadow in selection highlight:
+* https://twitter.com/miketaylr/status/12228805301
+*
+* Customize the background color to match your design.
+*/
+
+::selection {
+  background: mediumslateblue;
+  color: white;
+  text-shadow: none;
+}
+
+/*------------------------------------*\
+#Elements
+\*------------------------------------*/
+
+/*
+Elements: Images
+---
+Default markup for images to make them responsive
+*/
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+/*
+    Elements: typography
+    ---
+    Default markup for typographic elements
+*/
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.25rem;
+  line-height: 3rem;
+  margin: 0 0 1.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  margin: 0 0 1.5rem;
+}
+
+h3 {
+  font-size: 1.625rem;
+  line-height: 2rem;
+  margin: 0 0 1.5rem;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  margin: 0 0 1.5rem;
+}
+
+p,
+ol,
+ul,
+dl,
+table,
+address,
+figure {
+  margin: 0 0 1.5rem;
+}
+
+ul,
+ol {
+  padding-left: 1.5rem;
+}
+
+li ul,
+li ol {
+  margin-bottom: 0;
+}
+
+blockquote {
+  font-style: normal;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 0 0 1.5rem;
+}
+
+blockquote * {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+figcaption {
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  margin-top: 0.5rem;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: LightGrey;
+  margin: 0 0 1.5rem;
+}
+
+a {
+  transition: all 0.1s;
+  color: mediumslateblue;
+  outline-color: mediumslateblue;
+  outline-width: medium;
+  outline-offset: 2px;
+}
+
+a:visited,
+a:active {
+  color: mediumslateblue;
+}
+
+a:hover,
+a:focus {
+  color: slateblue;
+}
+
+label,
+input {
+  display: block;
+}
+
+select {
+  width: 100%;
+}
+
+/*------------------------------------*\
+#OBJECTS
+\*------------------------------------*/
+
+/*
+    Objects: Row
+    ---
+    Creates a horizontal row that stretches the viewport and adds padding around children
+*/
+
+.o-row {
+  position: relative;
+  padding: 1.5rem 1.5rem 0;
+}
+
+/*
+    Objects: Container
+    ---
+    Creates a horizontal container that sets de global max-width
+*/
+
+.o-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  padding: 2rem;
+  width: 100%;
+}
+
+/*
+    Objects: List
+    ---
+    Small reusable object to remove default list styling from lists
+*/
+
+.o-list {
+  list-style: none;
+  padding: 0;
+}
+
+/*
+    Object: Button reset
+    ---
+    Small button reset object
+*/
+
+.o-button-reset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+/*
+    Object: Hide accessible
+    ---
+    Accessibly hide any element
+*/
+
+.o-hide-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/*------------------------------------*\
+#COMPONENTS
+\*------------------------------------*/
+
+/*
+    Component: Logo
+    ---
+    Website main logo
+*/
+
+.c-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  align-content: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.c-header__title {
+  align-self: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------------------------------------- */
+/* teams  */
+.c-teams {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.c-team::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%; /* Begin met 0% breedte dus onzichtbaar */
+  bottom: 0;
+  height: 0.3rem;
+  background-color: var(--global-color-primary-700);
+  transition: right 0.2s ease;
+}
+
+.c-team--active::after {
+  right: 0; /* Verschuif de lijn naar links (0% breedte naar 100% breedte) wanneer het team actief is */
+}
+
+.c-team {
+  display: grid;
+  position: relative;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  align-content: center;
+  gap: 1rem;
+  background-color: var(--global-cardbackground-color);
+}
+
+.c-team__name {
+  align-self: center;
+
+  margin: 0;
+  padding: 0;
+}
+
+.c-team__logo {
+  text-align: center;
+  width: 3rem;
+}
+
+.c-team__logo img {
+  height: 3rem;
+  width: auto; /* of een specifieke breedte */
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+/* players */
+
+.c-players {
+  background-color: var(--global-cardbackground-color);
+  border-radius: var(--global-border-radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.c-players__positionname {
+  margin: 0;
+  padding: 0;
+}
+
+.c-players__position {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 1rem;
+  min-height: 12rem;
+}
+
+.c-players {
+  display: grid;
+  grid-template-columns: 1fr; /* Één kolom */
+  gap: 1rem;
+}
+
+.c-player {
+  display: grid;
+  grid-template-rows: 8rem auto; /* Twee rijen met automatische hoogte */
+
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  max-width: 10rem;
+}
+
+.c-player__name {
+  margin: 0;
+}
+
+.c-player__img {
+  height: 8rem;
+  width: auto;
+  max-width: 100%;
+}
+
+/* games */
+.c-games {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.c-game {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  place-items: center; /* Voeg deze regel toe om inhoud te centreren */
+  background-color: var(--global-cardbackground-color);
+  padding: 1rem;
+}
+
+.c-game__hometeam,
+.c-game__awayteam,
+.c-game__info,
+.c-game__score--home,
+.c-game__separator,
+.c-game__score--away,
+.c-game_detailsbtn {
+  text-align: center; /* Voeg deze regel toe voor tekstcentrering */
+}
+
+.c-game__hometeam {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.c-game__info {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.c-game__awayteam {
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.c-game__score--home {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.c-game__separator {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.c-game__score--away {
+  grid-row: 2;
+  grid-column: 3;
+}
+
+.c-game_detailsbtn {
+  grid-row: 3;
+  grid-column: 1 / span 3; /* Deze regel laat de knop over de 3 kolommen lopen */
+  background-color: var(--global-color-primary-700);
+  color: var(--global-color-primary-000);
+  padding: 0.5rem;
+  border: none; /* Geen rand om de knop */
+  border-radius: 2px; /* Afronding van de hoeken van de knop */
+  cursor: pointer; /* Pijlaanwijzer bij zweven over de knop */
+  transition: background-color 0.3s ease;
+}
+
+.c-game_detailsbtn:hover {
+  background-color: var(--global-color-primary-600);
+}
+
+.c-game__hometeam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.c-game__awayteam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.c-game__name,
+.c-game__score--away,
+.c-game__score--home {
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------------------------------------- */
+
+/*------------------------------------*\
+#UTILITIES
+\*------------------------------------*/
+
+/*
+    Utilities: color
+    ---
+    Utility classes to put specific colors onto elements
+*/
+
+.u-color-neutral {
+  color: darkgray;
+}
+
+.u-color-neutral-dark {
+  color: gray;
+}
+
+/*
+    Utilities: spacing
+    ---
+    Utility classes to put specific margins and paddings onto elements
+*/
+
+.u-pt-clear {
+  padding-top: 0 !important;
+}
+
+.u-mb-clear {
+  margin-bottom: 0 !important;
+}
+
+.u-mb-xs {
+  margin-bottom: 4px !important;
+}
+
+.u-mb-sm {
+  margin-bottom: 8px !important;
+}
+
+.u-mb-md {
+  margin-bottom: 16px !important;
+}
+
+.u-mb-lg {
+  margin-bottom: 32px !important;
+}
+
+.u-mb-xl {
+  margin-bottom: 48px !important;
+}
+
+/*
+    Utilities: max-width
+    ---
+    Utility classes to put specific max widths onto elements
+*/
+
+.u-max-width-xs {
+  max-width: 27em !important;
+}
+
+.u-max-width-sm {
+  max-width: 39em !important;
+}
+
+.u-max-width-md {
+  max-width: 50em !important;
+}
+
+.u-max-width-lg {
+  max-width: 63.5em !important;
+}
+
+.u-max-width-none {
+  max-width: none !important;
+}
+
+/*
+    Utilities: align
+    ---
+    Utility classes align text or components
+*/
+
+.u-align-text-center {
+  text-align: center;
+}
+
+.u-align-center {
+  margin: 0 auto;
+}
+
+/*
+    Utilities: text
+    Utility classes to create smaller or bigger test
+*/
+
+.u-text-sm {
+  font-size: 0.875rem;
+}
+
+/*------------------------------------*\
+#MEDIA
+\*------------------------------------*/
+
+/*
+    Media Queries
+    ---
+    EXAMPLE Media Queries for Responsive Design.
+    These examples override the primary ('mobile first') styles.
+    USE THEM INLINE!
+*/
+
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in mobile first design
+*/
+
+/* Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {}
+*/
+
+/* Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {}
+*/
+
+/* Large devices (landscape tablets, desktops, 992px and up)
+@media (min-width: 992px) {}
+*/
+
+/* Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}
+*/
+
+/*
+    Print styles.
+    ---
+    Inlined to avoid the additional HTTP request:
+    http://www.phpied.com/delay-loading-your-print-css/
+*/
+
+@media print {
+  *,
+  *:before,
+  *:after {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster:
+        http://www.sanbeiji.com/archives/953 */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: ' (' attr(href) ')';
+  }
+
+  abbr[title]:after {
+    content: ' (' attr(title) ')';
+  }
+
+  /*
+    * Don't show links that are fragment identifiers,
+    * or use the `javascript:` pseudo protocol
+    */
+  a[href^='#']:after,
+  a[href^='javascript:']:after {
+    content: '';
+  }
+
+  pre {
+    white-space: pre-wrap !important;
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  /*
+    * Printing Tables:
+    * http://css-discuss.incutio.com/wiki/Printing_Tables
+    */
+  thead {
+    display: table-header-group;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
