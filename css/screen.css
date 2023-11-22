@@ -28,7 +28,7 @@
   --global-color-primary-200: #c2d2f2;
   --global-color-primary-300: #a4b6eb;
   --global-color-primary-400: #8192e3;
-  --global-color-primary-500: #5e6cce; /* Middelblauw */
+  --global-color-primary-500: #5e6cce;
   --global-color-primary-600: #4652af;
   --global-color-primary-700: #001490; /* Donkerblauw */
 
@@ -448,7 +448,9 @@ select {
   max-width: 100%;
 }
 
-/* games */
+/* -------------------------------- */
+/* c-games */
+
 .c-games {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -459,7 +461,8 @@ select {
   display: grid;
   grid-template-rows: repeat(3, auto);
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 0.5rem;
+  row-gap: 1rem;
   place-items: center; /* Voeg deze regel toe om inhoud te centreren */
   background-color: var(--global-cardbackground-color);
   padding: 1rem;
@@ -510,10 +513,11 @@ select {
   grid-column: 1 / span 3; /* Deze regel laat de knop over de 3 kolommen lopen */
   background-color: var(--global-color-primary-700);
   color: var(--global-color-primary-000);
+  width: 100%;
   padding: 0.5rem;
-  border: none; /* Geen rand om de knop */
-  border-radius: 2px; /* Afronding van de hoeken van de knop */
-  cursor: pointer; /* Pijlaanwijzer bij zweven over de knop */
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
@@ -535,7 +539,10 @@ select {
 
 .c-game__name,
 .c-game__score--away,
-.c-game__score--home {
+.c-game__score--home,
+.c-game__date,
+.c-game__stadion,
+.c-game__time {
   margin: 0;
   padding: 0;
 }
