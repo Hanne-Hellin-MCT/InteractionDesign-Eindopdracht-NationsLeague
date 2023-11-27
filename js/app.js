@@ -1,9 +1,11 @@
 let data;
 let teamnames = document.querySelector('.js-teamnames');
 let players = document.querySelector('.js-players');
+let games = document.querySelector('.js-games');
 
 // data inladen
 let loaddata = async () => {
+    console.log('Loading data...');
     try {
         const response = await fetch('../assets/GroupA.json');
         const json = await response.json();
@@ -11,6 +13,8 @@ let loaddata = async () => {
         console.log(data);
         // Nadat de data is geladen, roep showTeams aan
         showTeams();
+        showGames();
+
     } catch (error) {
         console.error('Er is een fout opgetreden bij het laden van de gegevens:', error);
     }
@@ -29,6 +33,7 @@ let showTeams = () => {
                 <h3 class="c-team__name">${team.name}</h3>
             </div>`
         });
+
     } else {
         console.error('Geen gegevens beschikbaar. Zorg ervoor dat de gegevens correct zijn geladen.');
     }
@@ -96,7 +101,7 @@ function insertPlayersInHTML(position, players) {
         const imgElement = document.createElement("img");
         imgElement.classList.add("c-player__img");
         // imgElement.src = `assets/img/netherlands/${player.name.toLowerCase().replace(/\s/g, '')}.png`;
-        imgElement.src = `../assets/img/netherlands/daphnevandomslaar.png`;
+        imgElement.src = player.image;
         imgElement.alt = "";
 
         const nameElement = document.createElement("h4");
@@ -111,5 +116,75 @@ function insertPlayersInHTML(position, players) {
 }
 
 
+let showGames = () => {
+    inhoud = '';
+    // Controleer of data niet leeg is
+    if (data) {
+        data.matches.forEach(game => {
+            console.log(game);
+            inhoud += `<div class="c-game">
+            <div class="c-game__hometeam">
+                <img class="c-game__logo" src="/assets/img/${game.home_team}.png" height="40" width="auto" alt="${game.home_team}">
+                <h4 class="c-game__name">${game.home_team}</h4>
+            </div>
+            <div class="c-game__info">
+                <span class="c-game__date">${game.date}</span>
+                <p class="c-game__time">${game.time}</p>
+                <!-- <p class="c-game__stadion">${game.stadion}</p> -->
+            </div>
+            <div class="c-game__awayteam">
+                <img class="c-game__logo" src="/assets/img/${game.away_team}.png" height="40" width="auto" alt="${game.away_team}">
+                <h4 class="c-game__name">${game.away_team}</h4>
+            </div>
+            <h3 class="c-game__score--home">${game.home_goals}</h3>
+            <div class="c-game__separator">-</div>
+            <h3 class="c-game__score--away">${game.away_goals}</h3>
+
+            <button class="c-game_detailsbtn" onclick="showDetails('${game.matchid}')">Details</button>
+        </div>`
+        });
+    } else {
+        console.error('Geen gegevens beschikbaar. Zorg ervoor dat de gegevens correct zijn geladen.');
+    }
+    games.innerHTML = inhoud;
+}
+
+// Functie om details te tonen in het dialoogvenster
+let showDetails = (matchid) => {
+    // Hier zou je de rest van de gegevens moeten ophalen op basis van gameId
+    const game = data.matches.find(match => match.matchid === parseInt(matchid));
+
+    console.log(game);
+    if (game) {
+        document.querySelector('.js-gameinfo__hometeam').innerHTML = game.home_team;
+        document.querySelector('.js-gaminfo__homeimg').src = `/assets/img/${game.home_team}.png`;
+        document.querySelector('.js-gaminfo__homeimg').alt = game.home_team;
+        document.querySelector('.js-gameinfo__awayteam').innerHTML = game.away_team;
+        document.querySelector('.js-gaminfo__awayimg').src = `/assets/img/${game.away_team}.png`;
+        document.querySelector('.js-gaminfo__awayimg').alt = game.away_team;
+        document.querySelector('.js-gameinfo__date').innerHTML = game.date;
+        document.querySelector('.js-gameinfo__time').innerHTML = game.time;
+        document.querySelector('.js-gameinfo__stadion').innerHTML = game.stadion;
+        document.querySelector('.js-gameinfo__homegoals').innerHTML = game.home_goals;
+        document.querySelector('.js-gameinfo__awaygoals').innerHTML = game.away_goals;
+
+        document.body.classList.add('modal-open'); // Voeg een klasse toe om scrollen te voorkomen
+
+        // Voeg de blur-klasse toe aan alle elementen die moeten vervagen
+        const elementsToBlur = document.querySelectorAll('.blur-background');
+        elementsToBlur.forEach(element => {
+            element.classList.add('blur-background');
+        });
+        document.getElementById('myDialog').showModal();
+        document.getElementById('closeBtn').addEventListener('click', function () {
+            document.getElementById('myDialog').close();
+            document.body.classList.remove('modal-open'); // Verwijder de klasse om scrollen weer toe te staan
+        });
+    } else {
+        console.error('Geen gegevens beschikbaar voor gameId: ', matchid);
+    }
+}
+
 // Roep loaddata aan
 loaddata();
+
