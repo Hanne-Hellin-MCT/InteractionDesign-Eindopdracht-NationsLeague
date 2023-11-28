@@ -148,7 +148,6 @@ let showGames = () => {
     }
     games.innerHTML = inhoud;
 }
-
 // Functie om details te tonen in het dialoogvenster
 let showDetails = (matchid) => {
     // Hier zou je de rest van de gegevens moeten ophalen op basis van gameId
@@ -167,23 +166,65 @@ let showDetails = (matchid) => {
         document.querySelector('.js-gameinfo__stadion').innerHTML = game.stadion;
         document.querySelector('.js-gameinfo__homegoals').innerHTML = game.home_goals;
         document.querySelector('.js-gameinfo__awaygoals').innerHTML = game.away_goals;
+        let statistics = game.statistics;
+        let inhoud = '';
 
-        document.body.classList.add('modal-open'); // Voeg een klasse toe om scrollen te voorkomen
+        for (const key in statistics) {
+            if (statistics.hasOwnProperty(key)) {
+                const statistic = statistics[key];
+                console.log(statistic);
+                homebarpercentage = statistic.home / (statistic.home + statistic.away) * 100;
+                console.log(homebarpercentage);
+                awaybarpercentage = 100 - homebarpercentage;
+                const statLabel = key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ');
+                const barColor = (statistic.home === 0 && statistic.away === 0) ? 'gray' : '#4652af';
 
-        // Voeg de blur-klasse toe aan alle elementen die moeten vervagen
-        const elementsToBlur = document.querySelectorAll('.blur-background');
-        elementsToBlur.forEach(element => {
-            element.classList.add('blur-background');
-        });
-        document.getElementById('myDialog').showModal();
+                inhoud += `
+                    <div class="c-gamestatistics__grafiek">
+                        <p class="c-gamestatistics__homewaarde">${statistic.home}</p>
+                        <span class="c-gamestatistics__label">
+                            <p class="js-gameinfo__statisticlabel">${statLabel}</p>
+                        </span>
+                        <div class="c-gamestatistics__barcontainer">
+                            <div class="bar home-bar js-gameinfo__homebar" style="width: ${homebarpercentage}%; "></div>
+                            <div class="bar away-bar js-gameinfo__awaybar" style="width: ${awaybarpercentage}%; background-color: ${barColor}; left: ${homebarpercentage}%; "></div>
+                        </div>
+                        <p class="c-gamestatistics__awaywaarde js-gameinfo__awaystatistic">${statistic.away}</p>
+                    </div>
+                `;
+            }
+        }
+        document.querySelector('.js-gamestatistics').innerHTML = inhoud;
+
+        document.body.classList.add('modal-open'); //scrollklasse
+
+
+        // Voeg een animatieklasse toe bij het openen van het dialoogvenster
+        const dialog = document.getElementById('myDialog');
+        // dialog.classList.add('dialog-fade-in');
+
+        // Wacht tot de animatie is voltooid en open dan pas het dialoogvenster
+        setTimeout(function () {
+            dialog.showModal();
+        }, 300); // Pas de duur van de animatie hier aan
+
+        // Voeg een eventlistener toe aan het sluitknop-element
         document.getElementById('closeBtn').addEventListener('click', function () {
-            document.getElementById('myDialog').close();
-            document.body.classList.remove('modal-open'); // Verwijder de klasse om scrollen weer toe te staan
+            // Voeg een animatieklasse toe bij het sluiten van het dialoogvenster
+            // dialog.classList.add('dialog-fade-out');
+
+            // Wacht tot de animatie is voltooid en sluit dan pas het dialoogvenster
+            setTimeout(function () {
+                dialog.close();
+                dialog.classList.remove('dialog-fade-out');
+                document.body.classList.remove('modal-open'); // Verwijder de klasse om scrollen weer toe te staan
+            }, 300); // Pas de duur van de animatie hier aan
         });
     } else {
         console.error('Geen gegevens beschikbaar voor gameId: ', matchid);
     }
 }
+
 
 // Roep loaddata aan
 loaddata();

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UEFA Women's Nations League</title>
     <link rel="stylesheet" href="css/screen.css">
+    <link rel="shortcut icon" href="assets/UEFA_Women's_Nations_League_logo.ico" type="image/x-icon">
 </head>
 
 <body class="o-container">
@@ -103,7 +104,7 @@
 
     <!-- Dialog element -->
     <dialog id="myDialog" class="c-gameinfo">
-        <div id="popupContent">
+        <article id="popupContent">
             <div class="c-gameinfo__grid">
                 <div class="c-game__hometeam">
                     <img class="c-game__logo js-gaminfo__homeimg" src="" height="40" width="auto" alt="">
@@ -149,20 +150,22 @@
 
             </div>
 
-            <div class="c-gamestatistics">
-                <div class="c-gamestatistics__grafiek">
-                    <p class="c-gamestatistics__homewaarde">60%</p>
-                    <div class="c-gamestatistics__label">Balbezit</div>
-                    <div class="c-gamestatistics__barcontainer">
-                        <div class="bar home-bar"></div>
-                        <div class="bar away-bar"></div>
-                    </div>
-                    <p class="c-gamestatistics__awaywaarde">40%</p>
+            <article class="c-gamestatistics js-gamestatistics">
+                <!-- <span class="c-gamestatistics__grafiek">
+                    <p class="c-gamestatistics__homewaarde js-gameinfo__homestatistic">60%</p>
+                    <span class="c-gamestatistics__label">
+                        <p class="js-gameinfo__statisticlabel">Balbezit</p>
+                    </span>
+                    <span class="c-gamestatistics__barcontainer">
+                        <span class="bar home-bar js-gameinfo__homebar" style="width: 60%; "></span>
+                        <span class="bar away-bar js-gameinfo__awaybar" style="width: 40%; left: 60%;"></span>
+                    </span>
+                    <p class="c-gamestatistics__awaywaarde js-gameinfo__awaystatistic">40%</p>
 
-                </div>
+                </span> -->
 
-            </div>
-        </div>
+            </article>
+        </article>
         <button id="closeBtn" class="c-gameinfo__closebtn">Sluiten</button>
     </dialog>
 

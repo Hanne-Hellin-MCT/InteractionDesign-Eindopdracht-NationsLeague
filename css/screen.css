@@ -32,6 +32,9 @@
   --global-color-primary-600: #4652af;
   --global-color-primary-700: #001490; /* Donkerblauw */
 
+  --color-homestatistics: var(--global-color-primary-400); /* kleur van de balk voor het thuisteam */
+  --color-awaystatistics: var(--global-color-primary-600); /* kleur van de balk voor het uitteam */
+
   --global-text-color: var(--global-color-primary-700);
   --global-background-color: var(--global-color-neutral-050);
   --global-primary-color: var(--global-color-primary-700);
@@ -571,15 +574,12 @@ body.modal-open {
   overflow: hidden; /* Voorkom scrollen op de achtergrond */
 }
 
-.blur-background {
-  filter: blur(8px); /* Vervaag de achtergrond */
-  pointer-events: none; /* Laat geen interactie toe met de vervagen achtergrond */
-}
-
 .c-gameinfo {
   border: none;
   max-width: 90vw;
   background-color: var(--global-cardbackground-color);
+  animation: fadeIn 0.3s ease-in-out;
+  overflow-y: auto;
 }
 
 .c-gameinfo__grid {
@@ -642,48 +642,84 @@ body.modal-open {
 }
 
 .home-bar {
-  background-color: #4caf50; /* kleur van de balk voor het thuisteam */
-  width: 75%; /* aanpassen aan het percentage voor het thuisteam */
+  background-color: var(--color-homestatistics); /* kleur van de balk voor het thuisteam */
 }
 
 .away-bar {
-  background-color: #f44336; /* kleur van de balk voor het uitteam */
-  width: 25%; /* aanpassen aan het percentage voor het uitteam */
-  left: 75%; /* positie aanpassen op basis van het thuisteampercentage */
+  background-color: var(--color-awaystatistics); /* kleur van de balk voor het uitteam */
 }
 
 .c-gamestatistics__grafiek {
   display: grid;
-  grid-template-columns: repeat(3, min-content);
-  grid-template-rows: repeat(2, auto);
+  margin: auto;
+  grid-template-columns: 2rem auto 2rem;
+  grid-template-rows: repeat(2, min-content);
   gap: 1rem;
+  row-gap: 0.2rem;
   width: 90%;
+  padding-bottom: 1rem;
 }
 
 .c-gamestatistics__homewaarde {
   grid-column: 1;
-  grid-row: 1 / span 2;
+  grid-row: 2;
   margin: 0;
+  align-self: center;
 }
 
-.c-gamestatistics__homewaarde {
+.c-gamestatistics__awaywaarde {
   grid-column: 3;
-  grid-row: 1 / span 2;
+  grid-row: 2;
   margin: 0;
+  align-self: center;
 }
 
 .c-gamestatistics__label {
   grid-row: 1;
   grid-column: 2;
+  text-align: center;
+  align-self: center;
+}
+.c-gamestatistics__label p {
+  margin: 0;
+  padding: 0;
 }
 
 .c-gamestatistics__barcontainer {
   grid-row: 2;
   grid-column: 2;
   width: 100%;
-  height: 20px; /* aanpassen aan de gewenste hoogte van de balk */
+  height: 25px; /* aanpassen aan de gewenste hoogte van de balk */
   background-color: #ddd; /* kleur van de achtergrond van de balk */
   position: relative;
+}
+
+/* Voeg deze animatieklasse toe aan het dialoogvenster */
+.dialog-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.dialog-fade-out {
+  animation: fadeOut 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
 }
 
 /* ---------------------------------------- */
