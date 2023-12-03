@@ -28,7 +28,7 @@ let showTeams = () => {
             console.log(team.name);
             inhoud += `<div class="c-team" onclick="toggleTeam(this, '${team.name}')">
                 <div class="c-team__logo">
-                    <img src="/assets/img/${team.name}.png" alt="${team.name}">
+                    <img src="./assets/img/${team.name}.png" alt="${team.name}">
                 </div>
                 <h3 class="c-team__name">${team.name}</h3>
             </div>`
