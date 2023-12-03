@@ -46,60 +46,38 @@
         <section class="c-players js-players o-hide-accessible">
             <!-- Spelers zullen hier worden ingevoegd via js -->
             <h3 class="c-players__positionname">Goalkeepers</h3>
-            <div class="c-players__position js-goalkeepers">
-                <div class="c-player">
-                    <img class="c-player__img" src="assets/img/netherlands/daphnevandomslaar.png" alt="">
-                    <h4 class="c-player__name">Sari Vanvenendaal</h4>
-                </div>
+            <article class="c-players__position js-goalkeepers">
+                <!-- keepers in js -->
 
-            </div>
+            </article>
             <h3 class="c-players__positionname">Defenders</h3>
-            <div class="c-players__position js-defenders">
-                <div class="c-player">
-                    <img class="c-player__img" src="assets/img/netherlands/daphnevandomslaar.png" alt="">
-                    <h4 class="c-player__name">Sari Vanvenendaal</h4>
-                </div>
-            </div>
+            <article class="c-players__position js-defenders">
+                <!-- defenders in js -->
+            </article>
             <h3 class="c-players__positionname">Midfielders</h3>
-            <div class="c-players__position js-midfielders">
-                <div class="c-player">
-                    <img class="c-player__img" src="assets/img/netherlands/daphnevandomslaar.png" alt="">
-                    <h4 class="c-player__name">Sari Vanvenendaal</h4>
-                </div>
-            </div>
+            <article class="c-players__position js-midfielders">
+                <!-- midfielders in js -->
+            </article>
             <h3 class="c-players__positionname">Forwards</h3>
-            <div class="c-players__position js-forwards">
-                <div class="c-player">
-                    <img class="c-player__img" src="assets/img/netherlands/daphnevandomslaar.png" alt="">
-                    <h4 class="c-player__name">Sari Vanvenendaal</h4>
-                </div>
-            </div>
+            <article class="c-players__position js-forwards">
+                <!-- forwards in js -->
+            </article>
         </section>
     </article>
 
     <div>
-        <h1>Games</h1>
+        <h1>Matches</h1>
     </div>
     <article class="c-games js-games">
-        <!-- <div class="c-game">
-            <div class="c-game__hometeam">
-                <img class="c-game__logo" src="/assets/img/england.png" height="40" width="auto" alt="England">
-                <h4 class="c-game__name">England</h4>
-            </div>
-            <div class="c-game__info">
-                <span class="c-game__date">23 nov</span>
-                <p class="c-game__time">20u45</p>
-            </div>
-            <div class="c-game__awayteam">
-                <img class="c-game__logo" src="/assets/img/netherlands.png" height="40" width="auto" alt="Netherlands">
-                <h4 class="c-game__name">Netherlands</h4>
-            </div>
-            <h3 class="c-game__score--home">0</h3>
-            <div class="c-game__separator">-</div>
-            <h3 class="c-game__score--away">0</h3>
+        <!-- games in js -->
+    </article>
 
-            <button class="c-game_detailsbtn">Details</button>
-        </div> -->
+
+    <div>
+        <h1>Graphics</h1>
+    </div>
+    <article class="">
+        
     </article>
 
     <!-- Dialog element -->
@@ -119,50 +97,22 @@
                     <img class="c-game__logo js-gaminfo__awayimg" src="/assets/img/${game.away_team}.png" height="40" width="auto" alt="${game.away_team}">
                     <h4 class="c-game__name js-gameinfo__awayteam"></h4>
                 </div>
-                <h3 class="c-game__score--home js-gameinfo__homegoals">${game.home_goals}</h3>
+                <h3 class="c-game__score--home js-gameinfo__homegoals"></h3>
                 <div class="c-game__separator">-</div>
-                <h3 class="c-game__score--away js-gameinfo__awaygoals">${game.away_goals}</h3>
+                <h3 class="c-game__score--away js-gameinfo__awaygoals"></h3>
 
-                <div class="c-gameinfo__homescorers">
-                    <div class="c-gameinfo_scorer">
-                        <p class="c-gameinfo__scoretime ">'45</p><svg xmlns="http://www.w3.org/2000/svg" class="c-gameinfo__svg" height="24" viewBox="0 -960 960 960" width="24">
-                            <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm200-500 54-18 16-54q-32-48-77-82.5T574-786l-54 38v56l160 112Zm-400 0 160-112v-56l-54-38q-54 17-99 51.5T210-652l16 54 54 18Zm-42 308 46-4 30-54-58-174-56-20-40 30q0 65 18 118.5T238-272Zm242 112q26 0 51-4t49-12l28-60-26-44H378l-26 44 28 60q24 8 49 12t51 4Zm-90-200h180l56-160-146-102-144 102 54 160Zm332 88q42-50 60-103.5T800-494l-40-28-56 18-58 174 30 54 46 4Z" />
-
-                        </svg>
-
-                        <p>Miedema</p>
-                    </div>
-                    <div class="c-gameinfo_scorer">
-                        <p class="c-gameinfo__scoretime ">'90+3</p><svg xmlns="http://www.w3.org/2000/svg" class="c-gameinfo__svg" height="24" viewBox="0 -960 960 960" width="24">
-                            <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm200-500 54-18 16-54q-32-48-77-82.5T574-786l-54 38v56l160 112Zm-400 0 160-112v-56l-54-38q-54 17-99 51.5T210-652l16 54 54 18Zm-42 308 46-4 30-54-58-174-56-20-40 30q0 65 18 118.5T238-272Zm242 112q26 0 51-4t49-12l28-60-26-44H378l-26 44 28 60q24 8 49 12t51 4Zm-90-200h180l56-160-146-102-144 102 54 160Zm332 88q42-50 60-103.5T800-494l-40-28-56 18-58 174 30 54 46 4Z" />
-                        </svg>
-                        <p>Van De Donk</p>
-                    </div>
+                <div class="c-gameinfo__homescorers js-gameinfo__homescorers">
+                    <!-- wordt in js toegevoegd -->
                 </div>
-                <div class="c-gameinfo__awayscorers">
-                    <div class="c-gameinfo_scorer">
-                        <p class="c-gameinfo__scoretime ">'12</p><svg xmlns="http://www.w3.org/2000/svg" class="c-gameinfo__svg" height="24" viewBox="0 -960 960 960" width="24">
-                            <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm200-500 54-18 16-54q-32-48-77-82.5T574-786l-54 38v56l160 112Zm-400 0 160-112v-56l-54-38q-54 17-99 51.5T210-652l16 54 54 18Zm-42 308 46-4 30-54-58-174-56-20-40 30q0 65 18 118.5T238-272Zm242 112q26 0 51-4t49-12l28-60-26-44H378l-26 44 28 60q24 8 49 12t51 4Zm-90-200h180l56-160-146-102-144 102 54 160Zm332 88q42-50 60-103.5T800-494l-40-28-56 18-58 174 30 54 46 4Z" />
-                        </svg>
-                        <p>Mead</p>
-                    </div>
+                <div class="c-gameinfo__awayscorers js-gameinfo__awayscorers">
+                    <!-- wordt in js toegevoegd -->
+
                 </div>
 
             </div>
 
             <article class="c-gamestatistics js-gamestatistics">
-                <!-- <span class="c-gamestatistics__grafiek">
-                    <p class="c-gamestatistics__homewaarde js-gameinfo__homestatistic">60%</p>
-                    <span class="c-gamestatistics__label">
-                        <p class="js-gameinfo__statisticlabel">Balbezit</p>
-                    </span>
-                    <span class="c-gamestatistics__barcontainer">
-                        <span class="bar home-bar js-gameinfo__homebar" style="width: 60%; "></span>
-                        <span class="bar away-bar js-gameinfo__awaybar" style="width: 40%; left: 60%;"></span>
-                    </span>
-                    <p class="c-gamestatistics__awaywaarde js-gameinfo__awaystatistic">40%</p>
-
-                </span> -->
+                <!-- wordt in js toegevoegd -->
 
             </article>
         </article>

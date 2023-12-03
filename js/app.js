@@ -79,8 +79,6 @@ let showPlayers = (teamName) => {
         insertPlayersInHTML("defenders", team.players.filter(player => player.position === "Defender"));
         insertPlayersInHTML("midfielders", team.players.filter(player => player.position === "Midfielder"));
         insertPlayersInHTML("forwards", team.players.filter(player => player.position === "Forward"));
-
-
         team.players.forEach((player) => {
             console.log(`- ${player.name}, Positie: ${player.position}`);
         });
@@ -122,7 +120,8 @@ let showGames = () => {
     if (data) {
         data.matches.forEach(game => {
             console.log(game);
-            inhoud += `<div class="c-game">
+            if (game.played == 1) {
+                inhoud += `<div class="c-game">
             <div class="c-game__hometeam">
                 <img class="c-game__logo" src="/assets/img/${game.home_team}.png" height="40" width="auto" alt="${game.home_team}">
                 <h4 class="c-game__name">${game.home_team}</h4>
@@ -141,14 +140,37 @@ let showGames = () => {
             <h3 class="c-game__score--away">${game.away_goals}</h3>
 
             <button class="c-game_detailsbtn" onclick="showDetails('${game.matchid}')">Details</button>
+        </div>`}
+
+            if (game.played == 0) {
+                inhoud += `<div class="c-game">
+            <div class="c-game__hometeam">
+                <img class="c-game__logo" src="/assets/img/${game.home_team}.png" height="40" width="auto" alt="${game.home_team}">
+                <h4 class="c-game__name">${game.home_team}</h4>
+            </div>
+            <div class="c-game__info">
+                <span class="c-game__date">${game.date}</span>
+                <p class="c-game__time">${game.time}</p>
+                <!-- <p class="c-game__stadion">${game.stadion}</p> -->
+            </div>
+            <div class="c-game__awayteam">
+                <img class="c-game__logo" src="/assets/img/${game.away_team}.png" height="40" width="auto" alt="${game.away_team}">
+                <h4 class="c-game__name">${game.away_team}</h4>
+            </div>
+            <h3 class="c-game__score--home"></h3>
+            <div class="c-game__separator">-</div>
+            <h3 class="c-game__score--away"></h3>         
         </div>`
+            }
+
         });
     } else {
         console.error('Geen gegevens beschikbaar. Zorg ervoor dat de gegevens correct zijn geladen.');
     }
     games.innerHTML = inhoud;
 }
-// Functie om details te tonen in het dialoogvenster
+
+
 let showDetails = (matchid) => {
     // Hier zou je de rest van de gegevens moeten ophalen op basis van gameId
     const game = data.matches.find(match => match.matchid === parseInt(matchid));
@@ -166,6 +188,42 @@ let showDetails = (matchid) => {
         document.querySelector('.js-gameinfo__stadion').innerHTML = game.stadion;
         document.querySelector('.js-gameinfo__homegoals').innerHTML = game.home_goals;
         document.querySelector('.js-gameinfo__awaygoals').innerHTML = game.away_goals;
+
+
+        let homescorers = game.home_scorers
+        let inhoudhomescorers = ""
+        for (const scorerData of homescorers) {
+            const scorer = scorerData.scorer;
+            const time = scorerData.time;
+            console.log(`Scorer: ${scorer}, Time: ${time}`);
+            inhoudhomescorers += `<div class="c-gameinfo_scorer">
+            <p class="c-gameinfo__scoretime ">'${time}</p><svg xmlns="http://www.w3.org/2000/svg" class="c-gameinfo__svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm200-500 54-18 16-54q-32-48-77-82.5T574-786l-54 38v56l160 112Zm-400 0 160-112v-56l-54-38q-54 17-99 51.5T210-652l16 54 54 18Zm-42 308 46-4 30-54-58-174-56-20-40 30q0 65 18 118.5T238-272Zm242 112q26 0 51-4t49-12l28-60-26-44H378l-26 44 28 60q24 8 49 12t51 4Zm-90-200h180l56-160-146-102-144 102 54 160Zm332 88q42-50 60-103.5T800-494l-40-28-56 18-58 174 30 54 46 4Z" />
+            </svg>
+            <p>${scorer}</p>
+        </div>`
+        }
+
+        document.querySelector('.js-gameinfo__homescorers').innerHTML = inhoudhomescorers;
+
+        let awayscorers = game.away_scorers
+        let inhoudawayscorers = ""
+        for (const scorerData of awayscorers) {
+            const scorer = scorerData.scorer;
+            const time = scorerData.time;
+            console.log(`Scorer: ${scorer}, Time: ${time}`);
+            inhoudawayscorers += `<div class="c-gameinfo_scorer">
+            <p class="c-gameinfo__scoretime ">'${time}</p><svg xmlns="http://www.w3.org/2000/svg" class="c-gameinfo__svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm200-500 54-18 16-54q-32-48-77-82.5T574-786l-54 38v56l160 112Zm-400 0 160-112v-56l-54-38q-54 17-99 51.5T210-652l16 54 54 18Zm-42 308 46-4 30-54-58-174-56-20-40 30q0 65 18 118.5T238-272Zm242 112q26 0 51-4t49-12l28-60-26-44H378l-26 44 28 60q24 8 49 12t51 4Zm-90-200h180l56-160-146-102-144 102 54 160Zm332 88q42-50 60-103.5T800-494l-40-28-56 18-58 174 30 54 46 4Z" />
+
+            </svg>
+            <p>${scorer}</p>
+        </div>`
+
+        }
+
+        document.querySelector('.js-gameinfo__awayscorers').innerHTML = inhoudawayscorers;
+
         let statistics = game.statistics;
         let inhoud = '';
 
@@ -180,21 +238,24 @@ let showDetails = (matchid) => {
                 const barColor = (statistic.home === 0 && statistic.away === 0) ? 'gray' : '#4652af';
 
                 inhoud += `
-                    <div class="c-gamestatistics__grafiek">
+                    <span class="c-gamestatistics__grafiek">
                         <p class="c-gamestatistics__homewaarde">${statistic.home}</p>
                         <span class="c-gamestatistics__label">
                             <p class="js-gameinfo__statisticlabel">${statLabel}</p>
                         </span>
-                        <div class="c-gamestatistics__barcontainer">
-                            <div class="bar home-bar js-gameinfo__homebar" style="width: ${homebarpercentage}%; "></div>
-                            <div class="bar away-bar js-gameinfo__awaybar" style="width: ${awaybarpercentage}%; background-color: ${barColor}; left: ${homebarpercentage}%; "></div>
-                        </div>
+                        <span class="c-gamestatistics__barcontainer">
+                            <span class="bar home-bar js-gameinfo__homebar" style="width: ${homebarpercentage}%; "></span>
+                            <span class="bar away-bar js-gameinfo__awaybar" style="width: ${awaybarpercentage}%; background-color: ${barColor}; left: ${homebarpercentage}%; "></span>
+                        </span>
                         <p class="c-gamestatistics__awaywaarde js-gameinfo__awaystatistic">${statistic.away}</p>
-                    </div>
+                    </span>
                 `;
             }
         }
         document.querySelector('.js-gamestatistics').innerHTML = inhoud;
+
+
+
 
         document.body.classList.add('modal-open'); //scrollklasse
 
@@ -203,10 +264,18 @@ let showDetails = (matchid) => {
         const dialog = document.getElementById('myDialog');
         // dialog.classList.add('dialog-fade-in');
 
-        // Wacht tot de animatie is voltooid en open dan pas het dialoogvenster
+
         setTimeout(function () {
+
             dialog.showModal();
-        }, 300); // Pas de duur van de animatie hier aan
+        }, 300);
+
+        setTimeout(function () {
+            document.querySelectorAll('.home-bar').forEach(bar => {
+                bar.classList.add('animate-homebar');
+            });
+        }, 300);
+
 
         // Voeg een eventlistener toe aan het sluitknop-element
         document.getElementById('closeBtn').addEventListener('click', function () {
@@ -219,6 +288,11 @@ let showDetails = (matchid) => {
                 dialog.classList.remove('dialog-fade-out');
                 document.body.classList.remove('modal-open'); // Verwijder de klasse om scrollen weer toe te staan
             }, 300); // Pas de duur van de animatie hier aan
+            dialog.close();
+            document.querySelectorAll('.home-bar').forEach(bar => {
+                bar.classList.remove('animate-barHome');
+            });
+
         });
     } else {
         console.error('Geen gegevens beschikbaar voor gameId: ', matchid);
