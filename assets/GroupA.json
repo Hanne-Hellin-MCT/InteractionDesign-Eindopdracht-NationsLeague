@@ -11,7 +11,10 @@
           "draw": 0,
           "lost": 2,
           "goals_for": 14,
-          "goals_against": 6
+          "goals_against": 6,
+          "yellow_cards": 0,
+          "red_cards": 0
+          
         },
 
         "players": [
