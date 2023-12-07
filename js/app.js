@@ -2,6 +2,8 @@ let data;
 let teamnames = document.querySelector('.js-teamnames');
 let players = document.querySelector('.js-players');
 let games = document.querySelector('.js-games');
+const $legendEl = document.querySelector(`.js-legend`);
+const $chartEl = document.querySelector(`.js-chart`);
 
 // data inladen
 let loaddata = async () => {
@@ -15,6 +17,7 @@ let loaddata = async () => {
         showTeams();
         showGames();
 
+
     } catch (error) {
         console.error('Er is een fout opgetreden bij het laden van de gegevens:', error);
     }
@@ -25,6 +28,7 @@ let showTeams = () => {
     // Controleer of data niet leeg is
     if (data) {
         data.teams.forEach(team => {
+            renderLegendAndChart(team.name);
             console.log(team.name);
             inhoud += `<div class="c-team" onclick="toggleTeam(this, '${team.name}')">
                 <div class="c-team__logo">
@@ -48,7 +52,6 @@ let toggleTeam = (element, teamName) => {
     document.querySelectorAll('.c-team').forEach(el => {
         el.classList.remove('c-team--active');
     });
-
     // Als het team al actief is, maak het inactief, anders maak het actief
     if (!isActive) {
         element.classList.add('c-team--active');
@@ -72,9 +75,11 @@ let showPlayers = (teamName) => {
     // Zoek het team in de JSON-gegevens
     const team = data.teams.find((t) => t.name === teamName);
 
+
     if (team) {
         console.log(`Spelers van team ${teamName}:`);
         // Loop door de spelers van het gevonden team
+        updatePaths(teamName);
         insertPlayersInHTML("goalkeepers", team.players.filter(player => player.position === "Keeper"));
         insertPlayersInHTML("defenders", team.players.filter(player => player.position === "Defender"));
         insertPlayersInHTML("midfielders", team.players.filter(player => player.position === "Midfielder"));
@@ -112,6 +117,162 @@ function insertPlayersInHTML(position, players) {
         positionElement.appendChild(playerElement);
     });
 }
+
+
+const renderLegend = (teamName, legendData) => {
+    console.log("standen")
+    // Assuming data.teams is an object with teamName as keys
+    const team = data.teams.find(team => team.name === teamName);
+
+    if (!team) {
+        console.error(`Team not found: ${teamName}`);
+        return;
+    }
+
+    $legendEl.innerHTML = ``;
+    $legendEl.innerHTML += `<ul class="legend c-stands__legend "></ul>`;
+    const $legend = document.querySelector(`.legend`);
+
+
+
+    $legend.innerHTML += legendData.map(({ key, value, color }) => {
+        return `<li class="legend__item"><span class="legend__key">${key}</span><span class="legend__item__color" style="background-color:var(${color});"></span>
+        <span class="legend__value">${value}</li>`;
+    }).join(``);
+}
+
+const cos = Math.cos;
+const sin = Math.sin;
+const π = Math.PI;
+
+const f_matrix_times = (([[a, b], [c, d]], [x, y]) => [a * x + b * y, c * x + d * y]);
+const f_rotate_matrix = (x => [[cos(x), -sin(x)], [sin(x), cos(x)]]);
+const f_vec_add = (([a1, a2], [b1, b2]) => [a1 + b1, a2 + b2]);
+
+const drawArc = (([cx, cy], [rx, ry], [t1, Δ], φ,) => {
+    // convert t1 from degree to radian
+    t1 = t1 / 360 * 2 * π;
+    // convert Δ from degree to radian
+    Δ = Δ / 360 * 2 * π;
+    Δ = Δ % (2 * π);
+    // convert φ from degree to radian
+    φ = φ / 360 * 2 * π;
+    const rotMatrix = f_rotate_matrix(φ);
+    const [sX, sY] = (f_vec_add(f_matrix_times(rotMatrix, [rx * cos(t1), ry * sin(t1)]), [cx, cy]));
+    const [eX, eY] = (f_vec_add(f_matrix_times(rotMatrix, [rx * cos(t1 + Δ), ry * sin(t1 + Δ)]), [cx, cy]));
+    const fA = ((Δ > π) ? 1 : 0);
+    const fS = ((Δ > 0) ? 1 : 0);
+    const d = `M ${sX} ${sY} A ${[rx, ry, φ / (2 * π) * 360, fA, fS, eX, eY].join(" ")}`;
+    return d;
+});
+
+const drawCircle = ([cx, cy], r, φ) => {
+    const rotMatrix = f_rotate_matrix(φ);
+    const [sX, sY] = f_vec_add(f_matrix_times(rotMatrix, [r, 0]), [cx, cy]);
+    const eX = cx + r;
+    const eY = cy;
+
+    const d = `M ${sX} ${sY} A ${[r, r, 0, 1, 1, eX, eY].join(" ")}`;
+    return d;
+};
+
+const renderChart = (teamName, legendData) => {
+    const $svg = document.createElementNS(`http://www.w3.org/2000/svg`, `svg`);
+    $svg.setAttribute(`width`, `100%`);
+    $svg.setAttribute(`height`, `100%`);
+    $svg.setAttribute(`viewBox`, `0 0 400 200`);
+    $svg.setAttribute(`fill`, `none`);
+    $svg.classList.add(`chart`);
+
+    // Remove existing chart if any
+    const existingChart = document.querySelector('.chart');
+    if (existingChart) {
+        existingChart.remove();
+    }
+
+
+    $chartEl.appendChild($svg);
+
+    legendData.forEach((item, i) => {
+        const { key, color, value } = item;
+        console.log(`Setting color for ${key} to: ${color} and the value ${value}`);
+        const $path = document.createElementNS(`http://www.w3.org/2000/svg`, `path`);
+        $path.setAttribute(`class`, `chart__path`);
+        $path.setAttribute(`stroke-width`, 30);
+        $path.style.setProperty(`--strokeColor`, `var(${color})`);
+        $path.setAttribute(`id`, `chart__path--${key}`);
+
+        $path.setAttribute(`d`, drawArc([200, 200], [175, 175], [180, 180], 0));
+
+        $svg.insertBefore($path, $svg.firstChild);
+    });
+}
+
+const updatePaths = (teamName) => {
+    const team = data.teams.find(team => team.name === teamName);
+    const { won, draw, lost } = team.stands;
+    const legendData = [
+        { key: "Won", value: won, color: "--global-color-primary-700" },
+        { key: "Draw", value: draw, color: "--global-color-primary-500" },
+        { key: "Lost", value: lost, color: "--global-color-primary-300" }
+    ];
+    const $paths = document.querySelectorAll('.chart__path');
+    const totalValue = legendData.reduce((total, { value }) => total + value, 0);
+    let totalOffset = 0;
+    $paths.forEach(($path, i) => {
+        const length = $path.getTotalLength();
+        const gap = 0;
+
+        $path.setAttribute('pathLength', length);
+        $path.style.setProperty('--path-length', length);
+
+        const legendItem = legendData[i];
+        if (legendItem) {
+            const { value, color } = legendItem;
+            const percentage = (value / totalValue);
+            const dasharray = length * percentage;
+
+            $path.style.setProperty('--stroke-dasharray', dasharray);
+            $path.style.setProperty('--stroke-dashoffset', totalOffset * -1);
+            $path.style.setProperty(`--strokeColor`, `var(${color})`);
+
+            totalOffset += dasharray + gap;
+        }
+    });
+};
+
+
+const renderLegendAndChart = (teamName) => {
+    const team = data.teams.find(team => team.name === teamName);
+
+    if (!team) {
+        console.error(`Team not found: ${teamName}`);
+        return;
+    }
+
+    const { won, draw, lost } = team.stands;
+
+    const legendData = [
+        { key: "Won", value: won, color: "--global-color-primary-700" },
+        { key: "Draw", value: draw, color: "--global-color-primary-500" },
+        { key: "Lost", value: lost, color: "--global-color-primary-500" }
+    ];
+
+    // Remove existing legend if any
+    const existingLegend = document.querySelector('.legend');
+    if (existingLegend) {
+        existingLegend.remove();
+    }
+
+    renderLegend(teamName, legendData);
+    renderChart(teamName, legendData);
+}
+
+
+
+
+
+
 
 
 let showGames = () => {

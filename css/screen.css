@@ -451,6 +451,71 @@ select {
   max-width: 100%;
 }
 
+.chart {
+  /* max-width: 22rem; */
+  overflow: visible;
+}
+
+.c-stands__uitslagen {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.c-stands__chart {
+  max-width: 20rem;
+}
+
+.c-stands__legend {
+  margin: 0;
+  padding: 0;
+}
+
+.app_output {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  height: 5rem;
+  width: 6rem;
+}
+
+.app_chart {
+  height: 200px;
+  width: 400px;
+}
+
+.chart__path {
+  stroke-dasharray: var(--stroke-dasharray) var(--path-length);
+  stroke-dashoffset: var(--stroke-dashoffset);
+  /* stroke-linecap: round; */
+  transition: all 0.2s ease-in-out;
+  stroke: var(--strokeColor);
+}
+/* Stijl voor de legende-items */
+.legend__item {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 5px;
+}
+
+/* Stijl voor het gekleurde bolletje */
+.legend__item__color {
+  width: 0.85rem; /* Pas de breedte van het bolletje aan zoals gewenst */
+  height: 0.85rem; /* Pas de hoogte van het bolletje aan zoals gewenst */
+  border-radius: 50%;
+}
+
+.legend__key {
+  margin: 0;
+  min-width: 2.4rem;
+}
+
+.legend__value {
+  margin: 0;
+}
+
 /* -------------------------------- */
 /* c-games */
 

@@ -5,6 +5,15 @@
     "teams": [
       {
         "name": "Netherlands",
+        "stands":{
+          "played": 6,
+          "won": 4,
+          "draw": 0,
+          "lost": 2,
+          "goals_for": 14,
+          "goals_against": 6
+        },
+
         "players": [
           {
             "name": "Daphne van Domselaar",
@@ -856,6 +865,14 @@
       },
       {
         "name": "Belgium",
+        "stands":{
+          "played": 6,
+          "won": 2,
+          "draw": 2,
+          "lost": 2,
+          "goals_for": 7,
+          "goals_against": 10
+        },
         "players": [
           {
             "name": "Nicky Evrard",
@@ -1671,6 +1688,14 @@
       },
       {
         "name": "England",
+        "stands":{
+          "played": 6,
+          "won": 4,
+          "draw": 0,
+          "lost": 2,
+          "goals_for": 15,
+          "goals_against": 8
+        },
         "players": [
           {
             "name": "Mary Earps",
@@ -1814,7 +1839,7 @@
           },
           {
             "name": "Lucy Bronze",
-            "image":"https://cdn.englandfootball.com/-/jssmedia/EnglandFootball/PlayerProfile/WomenSenior/2023-profiles/millie-bright.png?h=750&iar=0&w=550&rev=d38c784d5ed0447b867166daa0ff14c7&hash=335548EE0F86B816B3A516D5E5F9364B",
+            "image":"https://cdn.englandfootball.com/-/jssmedia/EnglandFootball/PlayerProfile/WomenSenior/2023-profiles/LUCY-BRONZE-CUT-2.png?h=750&iar=0&w=550&rev=da83ef546eac4f6689a3fd3984207565&hash=196CFFA742F67190328113FC3C9D69AC",
             "position": "Defender",
             "player_stats": [
               {
@@ -1849,7 +1874,7 @@
           },
           {
             "name": "Jess Carter",
-            "image":"https://cdn.englandfootball.com/-/jssmedia/EnglandFootball/PlayerProfile/WomenSenior/2023-profiles/millie-bright.png?h=750&iar=0&w=550&rev=d38c784d5ed0447b867166daa0ff14c7&hash=335548EE0F86B816B3A516D5E5F9364B",
+            "image":"https://cdn.englandfootball.com/-/jssmedia/EnglandFootball/PlayerProfile/WomenSenior/2023-profiles/JESS-CARTER.png?h=750&iar=0&w=550&rev=387ed1b2c13640b099b8ccbb43f44a7b&hash=2CB7873BE2AEE1D4E6B09660170C25B8",
             "position": "Defender",
             "player_stats": [
               {
@@ -2486,6 +2511,14 @@
       },
       {
         "name": "Scotland",
+        "stands":{
+          "played": 6,
+          "won": 0,
+          "draw": 2,
+          "lost": 4,
+          "goals_for": 3,
+          "goals_against": 15
+        },
         "players": [
           {
             "name": "Jenna Fife",
@@ -3583,6 +3616,8 @@
         "away_team": "Netherlands",
         "home_goals": 0,
         "away_goals": 1,
+        "home_scorers":[],
+        "away_scorers":[{"scorer": "Brugts", "time": "60"}],
         "stadion": "Hampden Park, Glasgow",
         "city": "",
         "spectators": 28000,
@@ -3706,40 +3741,42 @@
       },
       {
         "matchid": 11,
-        "played": 0,
-        "date": "01/12/2023",
+        "played": 1,
+        "date": "05/12/2023",
         "time": "20u45",
-        "home_team": "England",
-        "away_team": "Scotland",
-        "home_goals": 3,
-        "away_goals": 2,
-        "stadion": "Wembley Stadium, London",
+        "home_team": "Scotland",
+        "away_team": "England",
+        "home_goals": 0,
+        "away_goals": 6,
+        "home_scorers":[{"scorer": "Greenwood", "time": "12"},{"scorer": "James", "time": "38"},{"scorer": "James", "time": "39"},{"scorer": "Mead", "time": "45+1"},{"scorer": "Kirby", "time": "49"},{"scorer": "Bronze", "time": "90+3"}],
+        "away_scorers":[],
+        "stadion": "Hampden Park, Glasgow",
         "city": "",
         "spectators": 14000,
         "statistics":{
         "possession": {
-          "home": 55,
-          "away": 45
+          "home": 36,
+          "away": 64
         },
         "shots_on_goal": {
-          "home": 5,
-          "away": 3
+          "home": 2,
+          "away": 9
         },
         "passes": {
-          "home": 503,
-          "away": 422
+          "home": 315,
+          "away": 548
         },
         "pass_accuracy": {
-          "home": 80,
-          "away": 72
+          "home": 63,
+          "away": 79
         },
         "fouls": {
-          "home": 8,
-          "away": 7
+          "home": 11,
+          "away": 6
         },
         "corners": {
           "home": 1,
-          "away": 3
+          "away": 4
         },
         "offside": {
           "home": 3,
@@ -3748,44 +3785,46 @@
       },
       {
         "matchid": 12,
-        "played": 0,
+        "played": 1,
         "date": "05/12/2023",
         "time": "20u45",
         "home_team": "Netherlands",
         "away_team": "Belgium",
-        "home_goals": 0,
+        "home_goals": 4,
         "away_goals": 0,
-        "stadion": "Wembley Stadium, London",
+        "home_scorers":[{"scorer": "Beerensteyn", "time": "34"},{"scorer": "Beerensteyn", "time": "54"},{"scorer": "Damaris", "time": "90+1"},{"scorer": "Damaris", "time": "90+5"}],
+        "away_scorers":[],
+        "stadion": "Koning Willem II Stadion, Tilburg",
         "city": "",
         "spectators": 14000,
         "statistics":{
         "possession": {
-          "home": 55,
-          "away": 45
+          "home": 71,
+          "away": 29
         },
         "shots_on_goal": {
-          "home": 5,
+          "home": 15,
           "away": 3
         },
         "passes": {
-          "home": 503,
-          "away": 422
+          "home": 631,
+          "away": 268
         },
         "pass_accuracy": {
-          "home": 80,
-          "away": 72
+          "home": 84,
+          "away": 58
         },
         "fouls": {
-          "home": 8,
-          "away": 7
+          "home": 6,
+          "away": 6
         },
         "corners": {
-          "home": 1,
-          "away": 3
+          "home": 8,
+          "away": 2
         },
         "offside": {
           "home": 3,
-          "away": 1
+          "away": 4
         }}
       }
     ]
