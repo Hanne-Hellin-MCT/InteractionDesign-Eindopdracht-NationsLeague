@@ -16,6 +16,7 @@ let loaddata = async () => {
         // Nadat de data is geladen, roep showTeams aan
         showTeams();
         showGames();
+        showRanking();
 
 
     } catch (error) {
@@ -30,12 +31,12 @@ let showTeams = () => {
         data.teams.forEach(team => {
             renderLegendAndChart(team.name);
             console.log(team.name);
-            inhoud += `<div class="c-team" onclick="toggleTeam(this, '${team.name}')">
+            inhoud += `<button class="c-team o-button-reset " onclick="toggleTeam(this, '${team.name}')" >
                 <div class="c-team__logo">
                     <img src="./assets/img/${team.name}.png" alt="${team.name}">
                 </div>
                 <h3 class="c-team__name">${team.name}</h3>
-            </div>`
+            </button>`
         });
 
     } else {
@@ -119,21 +120,19 @@ function insertPlayersInHTML(position, players) {
 }
 
 
-const renderLegend = (teamName, legendData) => {
-    console.log("standen")
-    // Assuming data.teams is an object with teamName as keys
-    const team = data.teams.find(team => team.name === teamName);
+const showcards = (teamName) => {
+    team = data.teams.find(team => team.name === teamName);
+    document.querySelector('.js-stands_yellowcard').innerHTML = team.stands.yellow_cards;
+    document.querySelector('.js-stands_redcard').innerHTML = team.stands.red_cards;
+}
 
-    if (!team) {
-        console.error(`Team not found: ${teamName}`);
-        return;
-    }
-
+const renderLegend = (legendData) => {
+    console.log("standen");
     $legendEl.innerHTML = ``;
     $legendEl.innerHTML += `<ul class="legend c-stands__legend "></ul>`;
     const $legend = document.querySelector(`.legend`);
 
-
+    console.log(legendData);
 
     $legend.innerHTML += legendData.map(({ key, value, color }) => {
         return `<li class="legend__item"><span class="legend__key">${key}</span><span class="legend__item__color" style="background-color:var(${color});"></span>
@@ -166,15 +165,6 @@ const drawArc = (([cx, cy], [rx, ry], [t1, Δ], φ,) => {
     return d;
 });
 
-const drawCircle = ([cx, cy], r, φ) => {
-    const rotMatrix = f_rotate_matrix(φ);
-    const [sX, sY] = f_vec_add(f_matrix_times(rotMatrix, [r, 0]), [cx, cy]);
-    const eX = cx + r;
-    const eY = cy;
-
-    const d = `M ${sX} ${sY} A ${[r, r, 0, 1, 1, eX, eY].join(" ")}`;
-    return d;
-};
 
 const renderChart = (teamName, legendData) => {
     const $svg = document.createElementNS(`http://www.w3.org/2000/svg`, `svg`);
@@ -190,6 +180,8 @@ const renderChart = (teamName, legendData) => {
         existingChart.remove();
     }
 
+    console.log(`Render chart for ${teamName}`)
+    console.log(legendData)
 
     $chartEl.appendChild($svg);
 
@@ -216,6 +208,22 @@ const updatePaths = (teamName) => {
         { key: "Draw", value: draw, color: "--global-color-primary-500" },
         { key: "Lost", value: lost, color: "--global-color-primary-300" }
     ];
+    $legendEl.innerHTML = ``;
+    $legendEl.innerHTML += `<ul class="legend c-stands__legend "></ul>`;
+    const $legend = document.querySelector(`.legend`);
+
+    console.log(legendData);
+
+    $legend.innerHTML += legendData.map(({ key, value, color }) => {
+        return `<li class="legend__item"><span class="legend__key">${key}</span><span class="legend__item__color" style="background-color:var(${color});"></span>
+        <span class="legend__value">${value}</li>`;
+    }).join(``);
+
+
+
+    document.querySelector('.js-stands_yellowcard').innerHTML = team.stands.yellow_cards;
+    document.querySelector('.js-stands_redcard').innerHTML = team.stands.red_cards;
+
     const $paths = document.querySelectorAll('.chart__path');
     const totalValue = legendData.reduce((total, { value }) => total + value, 0);
     let totalOffset = 0;
@@ -264,8 +272,9 @@ const renderLegendAndChart = (teamName) => {
         existingLegend.remove();
     }
 
-    renderLegend(teamName, legendData);
+    renderLegend(legendData);
     renderChart(teamName, legendData);
+    showcards(teamName);
 }
 
 
@@ -300,7 +309,7 @@ let showGames = () => {
             <div class="c-game__separator">-</div>
             <h3 class="c-game__score--away">${game.away_goals}</h3>
 
-            <button class="c-game_detailsbtn" onclick="showDetails('${game.matchid}')">Details</button>
+            <button class="c-game__detailsbtn"  tabindex="0" onclick="showDetails('${game.matchid}')">Details</button>
         </div>`}
 
             if (game.played == 0) {
@@ -461,6 +470,78 @@ let showDetails = (matchid) => {
 }
 
 
+
+const showRanking = () => {
+    rankingdata = []
+    data.teams.forEach(team => {
+        console.log(team.stands);
+        let points = team.stands.won * 3 + team.stands.draw;
+        let goaldifference = team.stands.goals_for - team.stands.goals_against;
+        rankingdata.push({ teamname: team.name, stands: team.stands, points: points, goaldifference: goaldifference });
+    });
+    rankingdata.sort(function (a, b) {
+        // Eerst sorteren op meeste punten (points)
+        if (b.points !== a.points) {
+            return b.points - a.points;
+        }
+        // Als punten gelijk zijn, sorteer op hoogste doelsaldo (goaldifference)
+        return b.goaldifference - a.goaldifference;
+    });
+    console.log(rankingdata);
+
+    const rankingContainer = document.querySelector('.c-ranking');
+
+    rankingdata.forEach((team, i) => {
+        const teamElement = document.createElement('div');
+        teamElement.classList.add('c-ranking__teams');
+
+        teamElement.innerHTML = `
+        <div class="c-ranking__teamname">
+        <h3 class="c-ranking__position">${i + 1}</h3>
+        <div class="c-ranking__logo">
+        <img src="/assets/img/${team.teamname}.png" alt="">
+        </div>
+        <h3 class="c-ranking__name">${team.teamname}</h3>
+        </div>
+        <p class="c-ranking__played ">${team.stands.played}</p>
+        <p class="c-ranking__won ">${team.stands.won}</p>
+        <p class="c-ranking__draw ">${team.stands.draw}</p>
+        <p class="c-ranking__lost ">${team.stands.lost}</p>
+        <p class="c-ranking__goalsfor" >${team.stands.goals_for}</p>
+        <p class="c-ranking__goalsagainst">${team.stands.goals_against}</p>
+        <p class="c-ranking__goalsdifference">${team.goaldifference}</p>
+        <p class="c-ranking__points ">${team.points}</p>
+        `;
+
+        rankingContainer.appendChild(teamElement);
+    });
+
+};
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     setTimeout(function () {
+//         document.querySelector('.c-overlay').addEventListener('mouseover', function () {
+//             var overlay = document.querySelector('.c-overlay');
+//             overlay.classList.add('slide-out');
+//             document.querySelector('.js-pagina').classList.add('slide-in');
+
+
+//         });
+//     }, 2000);
+//     setTimeout(function () {
+//         var overlay = document.querySelector('.c-overlay');
+//         overlay.classList.add('slide-out');
+//     }, 5000);
+
+
+//     // Voeg een event listener toe voor de hover-interactie
+
+// });
+
+
+
 // Roep loaddata aan
 loaddata();
-

@@ -12,9 +12,8 @@
           "lost": 2,
           "goals_for": 14,
           "goals_against": 6,
-          "yellow_cards": 0,
+          "yellow_cards": 4,
           "red_cards": 0
-          
         },
 
         "players": [
@@ -874,7 +873,9 @@
           "draw": 2,
           "lost": 2,
           "goals_for": 7,
-          "goals_against": 10
+          "goals_against": 10,
+          "yellow_cards": 5,
+          "red_cards": 0
         },
         "players": [
           {
@@ -1697,7 +1698,9 @@
           "draw": 0,
           "lost": 2,
           "goals_for": 15,
-          "goals_against": 8
+          "goals_against": 8,
+          "yellow_cards": 2,
+          "red_cards": 0
         },
         "players": [
           {
@@ -2520,7 +2523,9 @@
           "draw": 2,
           "lost": 4,
           "goals_for": 3,
-          "goals_against": 15
+          "goals_against": 15,
+          "yellow_cards": 6,
+          "red_cards": 0
         },
         "players": [
           {

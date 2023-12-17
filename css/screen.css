@@ -338,7 +338,82 @@ select {
     Website main logo
 */
 
+.c-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--global-color-primary-300);
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  z-index: 1000;
+}
+
+.c-overlay__logo {
+  margin-bottom: 20px;
+}
+
+.c-overlay__logo svg {
+  width: 100%;
+  height: auto;
+}
+
+.c-header__title {
+  font-size: 2em;
+}
+
+.slide-out {
+  animation: slideOut 0.5s ease-in-out 5s forwards;
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Voeg fadeIn animatie toe aan de gewenste elementen na het verdwijnen van de overlay */
+.slide-in {
+  animation: slideIn 0.5s ease-in-out forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.5s ease-in-out forwards;
+}
+
 .c-header {
+  margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
@@ -349,6 +424,7 @@ select {
 
 .c-header__title {
   align-self: center;
+
   margin: 0;
   padding: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -356,11 +432,37 @@ select {
 
 /* ---------------------------------------- */
 /* teams  */
+
+.c-team {
+  display: grid;
+  position: relative;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  align-content: center;
+  gap: 1rem;
+  background-color: var(--global-cardbackground-color);
+  box-shadow: var(--global-shadow);
+}
 .c-teams {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
+}
+
+.c-team:focus-visible {
+  outline: none;
+  position: relative;
+}
+
+.c-team:focus-visible::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0.3rem;
+  background-color: var(--global-color-primary-400);
 }
 
 .c-team::after {
@@ -376,17 +478,6 @@ select {
 
 .c-team--active::after {
   right: 0; /* Verschuif de lijn naar links (0% breedte naar 100% breedte) wanneer het team actief is */
-}
-
-.c-team {
-  display: grid;
-  position: relative;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  align-content: center;
-  gap: 1rem;
-  background-color: var(--global-cardbackground-color);
-  box-shadow: var(--global-shadow);
 }
 
 .c-team__name {
@@ -474,6 +565,8 @@ select {
   display: flex;
   gap: 2rem;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .c-stands__info {
@@ -607,7 +700,7 @@ select {
   grid-column: 3;
 }
 
-.c-game_detailsbtn {
+.c-game__detailsbtn {
   grid-row: 3;
   grid-column: 1 / span 3; /* Deze regel laat de knop over de 3 kolommen lopen */
   background-color: var(--global-color-primary-700);
@@ -620,11 +713,11 @@ select {
   transition: background-color 0.3s ease;
 }
 
-.c-game_detailsbtn:hover {
+.c-game__detailsbtn:hover {
   background-color: var(--global-color-primary-600);
 }
 
-.c-game_detailsbtn:focus {
+.c-game__detailsbtn:focus {
   background-color: var(--global-color-primary-500);
 }
 
@@ -740,7 +833,22 @@ body.modal-open {
   border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  :focus {
+    z-index: 100;
+    background-color: var(--global-color-primary-500);
+  }
 }
+
+.c-gameinfo__closebtn:hover {
+  background-color: var(--global-color-primary-600);
+}
+
+.c-gameinfo__closebtn:focus {
+  z-index: 100;
+  background-color: var(--global-color-primary-500);
+}
+
 .c-gameinfo__statistics {
   width: 300px; /* of een andere gewenste breedte */
   margin: auto; /* om in het midden van de pagina te centreren */
@@ -845,6 +953,76 @@ body.modal-open {
   to {
     opacity: 0;
   }
+}
+
+/* ranking */
+
+.c-ranking {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: auto;
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.c-ranking__header {
+  grid-column: 2 / span 9;
+  font-weight: 700;
+  font-size: 1.5rem;
+
+  display: grid;
+  grid-template-columns: subgrid;
+  border-bottom: 2px solid var(--global-color-primary-700);
+}
+
+.c-ranking__header p {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.c-ranking__teams {
+  grid-column: 1 / span 9;
+  font-weight: 700;
+  font-size: 1.5rem;
+
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.c-ranking__teams p {
+  text-align: center;
+  font-size: 80%;
+  margin: 0;
+  padding: 0;
+}
+
+.c-ranking__teamname {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.c-ranking__logo {
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.c-ranking__teamname img {
+  height: 2rem;
+  width: auto;
+}
+.c-ranking__position {
+  width: 1rem;
+}
+.c-ranking__teamname h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 80%;
 }
 
 /* ---------------------------------------- */
