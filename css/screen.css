@@ -316,6 +316,39 @@ select {
     ---
     Accessibly hide any element
 */
+/* 
+/* Voeg deze CSS-regels toe voor de animaties */
+/* @keyframes rollOut {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes rollIn {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0;
+  }
+}
+
+.o-hide-accessible {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+.o-hide-accessible.inactive {
+  animation: rollIn 0.3s ease-in-out;
+}
+
+.o-hide-accessible.active {
+  animation: rollOut 0.3s ease-in-out;
+} */
 
 .o-hide-accessible {
   position: absolute;
@@ -327,7 +360,6 @@ select {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-
 /*------------------------------------*\
 #COMPONENTS
 \*------------------------------------*/
@@ -439,10 +471,11 @@ select {
   grid-template-columns: auto 1fr;
   align-items: center;
   align-content: center;
-  gap: 1rem;
+  /* gap: 1rem; */
   background-color: var(--global-cardbackground-color);
   box-shadow: var(--global-shadow);
 }
+
 .c-teams {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -482,7 +515,7 @@ select {
 
 .c-team__name {
   align-self: center;
-
+  justify-self: start;
   margin: 0;
   padding: 0;
 }
@@ -642,6 +675,10 @@ select {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
+}
+
+.c-sectiongames {
+  margin-bottom: 2rem;
 }
 
 .c-game {
@@ -959,12 +996,15 @@ body.modal-open {
 
 .c-ranking {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(9, min-width(6rem));
   grid-template-rows: auto;
   row-gap: 0.5rem;
   column-gap: 0.5rem;
   overflow-x: auto;
   white-space: nowrap;
+  background-color: var(--global-cardbackground-color);
+  box-shadow: var(--global-shadow);
+  padding: 1rem;
 }
 
 .c-ranking__header {
@@ -987,7 +1027,7 @@ body.modal-open {
   grid-column: 1 / span 9;
   font-weight: 700;
   font-size: 1.5rem;
-
+  padding-left: 0.5rem;
   display: grid;
   grid-template-columns: subgrid;
 }
@@ -1023,6 +1063,10 @@ body.modal-open {
   margin: 0;
   padding: 0;
   font-size: 80%;
+}
+
+.c-ranking__teams--first {
+  border-left: 0.3rem solid var(--global-color-primary-700);
 }
 
 /* ---------------------------------------- */

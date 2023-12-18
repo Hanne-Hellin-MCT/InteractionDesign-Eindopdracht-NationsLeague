@@ -60,14 +60,15 @@ let toggleTeam = (element, teamName) => {
         showPlayers(teamName);
     }
 
-    //als geen enkel team actief is, verwijder de spelers
+    // Als geen enkel team actief is, verwijder de spelers met animatie
     if (!document.querySelector('.c-team--active')) {
-        console.log('geen enkel team actief');
+        console.log('Geen enkel team actief');
         players.classList.add('o-hide-accessible');
-        players.classList.add('active');
+        players.classList.add('inactive');
     } else {
+        // Als een team actief is, toon de spelers met animatie
         players.classList.remove('o-hide-accessible');
-        players.classList.remove('active');
+        players.classList.remove('inactive');
     }
 };
 
@@ -75,7 +76,6 @@ let toggleTeam = (element, teamName) => {
 let showPlayers = (teamName) => {
     // Zoek het team in de JSON-gegevens
     const team = data.teams.find((t) => t.name === teamName);
-
 
     if (team) {
         console.log(`Spelers van team ${teamName}:`);
@@ -514,6 +514,12 @@ const showRanking = () => {
         `;
 
         rankingContainer.appendChild(teamElement);
+
+        if (i === 0) {
+            teamElement.classList.add('c-ranking__teams--first');
+        }
+
+
     });
 
 };
