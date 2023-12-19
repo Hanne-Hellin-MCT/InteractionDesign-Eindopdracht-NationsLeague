@@ -316,39 +316,6 @@ select {
     ---
     Accessibly hide any element
 */
-/* 
-/* Voeg deze CSS-regels toe voor de animaties */
-/* @keyframes rollOut {
-  from {
-    height: 0;
-  }
-  to {
-    height: 100%;
-  }
-}
-
-@keyframes rollIn {
-  from {
-    height: 100%;
-  }
-  to {
-    height: 0;
-  }
-}
-
-.o-hide-accessible {
-  height: 0;
-  overflow: hidden;
-  transition: height 0.3s ease-in-out;
-}
-
-.o-hide-accessible.inactive {
-  animation: rollIn 0.3s ease-in-out;
-}
-
-.o-hide-accessible.active {
-  animation: rollOut 0.3s ease-in-out;
-} */
 
 .o-hide-accessible {
   position: absolute;
@@ -369,32 +336,6 @@ select {
     ---
     Website main logo
 */
-
-.c-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: var(--global-color-primary-300);
-  background-size: cover;
-  background-position: center;
-  color: #ffffff;
-  z-index: 1000;
-}
-
-.c-overlay__logo {
-  margin-bottom: 20px;
-}
-
-.c-overlay__logo svg {
-  width: 100%;
-  height: auto;
-}
 
 .c-header__title {
   font-size: 2em;
@@ -478,7 +419,7 @@ select {
 
 .c-teams {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
 }
@@ -649,7 +590,7 @@ select {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 5px;
+  margin-bottom: 0.3rem;
 }
 
 /* Stijl voor het gekleurde bolletje */
@@ -673,7 +614,7 @@ select {
 
 .c-games {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
   gap: 1rem;
 }
 
@@ -704,7 +645,7 @@ select {
 }
 
 .c-game__logo {
-  height: 40px;
+  height: 2.5rem;
   width: auto;
 }
 .c-game__hometeam {
@@ -844,7 +785,7 @@ body.modal-open {
 }
 @media (max-width: 600px) {
   .c-gameinfo_scorer {
-    grid-template-columns: min-content; /* Verander naar één kolom als scherm kleiner is dan 768px */
+    grid-template-columns: min-content;
   }
 
   .c-gameinfo_scorer p {
@@ -887,8 +828,8 @@ body.modal-open {
 }
 
 .c-gameinfo__statistics {
-  width: 300px; /* of een andere gewenste breedte */
-  margin: auto; /* om in het midden van de pagina te centreren */
+  width: 19rem;
+  margin: auto;
 }
 
 .bar {
@@ -1174,41 +1115,6 @@ body.modal-open {
 /*------------------------------------*\
 #MEDIA
 \*------------------------------------*/
-
-/*
-    Media Queries
-    ---
-    EXAMPLE Media Queries for Responsive Design.
-    These examples override the primary ('mobile first') styles.
-    USE THEM INLINE!
-*/
-
-/* Extra small devices (portrait phones, less than 576px)
-No media query since this is the default in mobile first design
-*/
-
-/* Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {}
-*/
-
-/* Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {}
-*/
-
-/* Large devices (landscape tablets, desktops, 992px and up)
-@media (min-width: 992px) {}
-*/
-
-/* Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {}
-*/
-
-/*
-    Print styles.
-    ---
-    Inlined to avoid the additional HTTP request:
-    http://www.phpied.com/delay-loading-your-print-css/
-*/
 
 @media print {
   *,
