@@ -72,7 +72,6 @@ let toggleTeam = (element, teamName) => {
     }
 };
 
-
 let showPlayers = (teamName) => {
     // Zoek het team in de JSON-gegevens
     const team = data.teams.find((t) => t.name === teamName);
@@ -104,9 +103,8 @@ function insertPlayersInHTML(position, players) {
 
         const imgElement = document.createElement("img");
         imgElement.classList.add("c-player__img");
-        // imgElement.src = `assets/img/netherlands/${player.name.toLowerCase().replace(/\s/g, '')}.png`;
         imgElement.src = player.image;
-        imgElement.alt = "";
+        imgElement.alt = `${player.name}`;
 
         const nameElement = document.createElement("h4");
         nameElement.classList.add("c-player__name");
