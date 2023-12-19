@@ -5,20 +5,20 @@ let games = document.querySelector('.js-games');
 const $legendEl = document.querySelector(`.js-legend`);
 const $chartEl = document.querySelector(`.js-chart`);
 
+
+
 // data inladen
 let loaddata = async () => {
     console.log('Loading data...');
     try {
-        const response = await fetch('../assets/GroupA.json');
-        const json = await response.json();
-        data = json;
+        // const response = await fetch('../assets/GroupA.json');
+        // const json = await response.json();
+        data = testdata;
         console.log(data);
         // Nadat de data is geladen, roep showTeams aan
         showTeams();
         showGames();
         showRanking();
-
-
     } catch (error) {
         console.error('Er is een fout opgetreden bij het laden van de gegevens:', error);
     }
@@ -291,7 +291,7 @@ let showGames = () => {
             if (game.played == 1) {
                 inhoud += `<div class="c-game">
             <div class="c-game__hometeam">
-                <img class="c-game__logo" src="/assets/img/${game.home_team}.png" height="40" width="auto" alt="${game.home_team}">
+                <img class="c-game__logo" src="./assets/img/${game.home_team}.png" height="40" width="auto" alt="${game.home_team}">
                 <h4 class="c-game__name">${game.home_team}</h4>
             </div>
             <div class="c-game__info">
@@ -300,7 +300,7 @@ let showGames = () => {
                 <!-- <p class="c-game__stadion">${game.stadion}</p> -->
             </div>
             <div class="c-game__awayteam">
-                <img class="c-game__logo" src="/assets/img/${game.away_team}.png" height="40" width="auto" alt="${game.away_team}">
+                <img class="c-game__logo" src="./assets/img/${game.away_team}.png" height="40" width="auto" alt="${game.away_team}">
                 <h4 class="c-game__name">${game.away_team}</h4>
             </div>
             <h3 class="c-game__score--home">${game.home_goals}</h3>
@@ -346,10 +346,10 @@ let showDetails = (matchid) => {
     console.log(game);
     if (game) {
         document.querySelector('.js-gameinfo__hometeam').innerHTML = game.home_team;
-        document.querySelector('.js-gaminfo__homeimg').src = `/assets/img/${game.home_team}.png`;
+        document.querySelector('.js-gaminfo__homeimg').src = `./assets/img/${game.home_team}.png`;
         document.querySelector('.js-gaminfo__homeimg').alt = game.home_team;
         document.querySelector('.js-gameinfo__awayteam').innerHTML = game.away_team;
-        document.querySelector('.js-gaminfo__awayimg').src = `/assets/img/${game.away_team}.png`;
+        document.querySelector('.js-gaminfo__awayimg').src = `./assets/img/${game.away_team}.png`;
         document.querySelector('.js-gaminfo__awayimg').alt = game.away_team;
         document.querySelector('.js-gameinfo__date').innerHTML = game.date;
         document.querySelector('.js-gameinfo__time').innerHTML = game.time;
