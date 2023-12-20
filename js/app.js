@@ -497,7 +497,7 @@ const showRanking = () => {
         <div class="c-ranking__teamname">
         <h3 class="c-ranking__position">${i + 1}</h3>
         <div class="c-ranking__logo">
-        <img src="/assets/img/${team.teamname}.png" alt="">
+        <img src="./assets/img/${team.teamname}.png" alt="${team.teamname}">
         </div>
         <h3 class="c-ranking__name">${team.teamname}</h3>
         </div>
