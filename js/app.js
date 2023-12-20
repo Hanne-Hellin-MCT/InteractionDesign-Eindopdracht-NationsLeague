@@ -33,7 +33,7 @@ let showTeams = () => {
             console.log(team.name);
             inhoud += `<button class="c-team o-button-reset " onclick="toggleTeam(this, '${team.name}')" >
                 <div class="c-team__logo">
-                    <img src="./assets/img/${team.name}.png" alt="${team.name}">
+                    <img src="../assets/img/${team.name}.png" alt="${team.name}">
                 </div>
                 <h3 class="c-team__name">${team.name}</h3>
             </button>`
